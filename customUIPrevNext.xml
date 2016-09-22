@@ -1,0 +1,15 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="RibbonLoaded">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabHome" insertBeforeMso="GroupFont">
+        <group id="customGroup1" label="Thing Control" insertAfterMso="GroupEditingExcel">
+          <button id="btnPrevThing" label="Previous Thing" size="large" 
+		onAction="PrevThing" imageMso="OutlinePromote" getEnabled="GetEnabledPrevThing" />
+		<editBox id="lblCurrThing" label="CurrentThing" enabled="false" getText="getCurrentThing"/>
+          <button id="btnNextThing" label="Next Thing" size="large" 
+		onAction="NextThing" imageMso="OutlineDemote" getEnabled="GetEnabledNextThing" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
