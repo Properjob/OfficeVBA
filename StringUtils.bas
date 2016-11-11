@@ -1,4 +1,12 @@
 Attribute VB_Name = "StringUtils"
+Function StringUtils() As String
+    StringUtils = "1.2" ' Version
+    
+    ' 1.0 Initial Work, Added Piece, Extract, TextFromCell
+    ' 1.1 Fix to Extract
+    ' 1.2 Fix to TextFromCell
+End Function
+
 Function Piece(Str As String, Delim As String, StartPiece As Integer, Optional EndPiece As Integer) As String
     Dim RetStr As String
     Dim RetArr() As String
@@ -20,6 +28,7 @@ Function Piece(Str As String, Delim As String, StartPiece As Integer, Optional E
     '
     ' Check StartPiece is Lower than the last piece
     If StartPiece > UBnd Then GoTo Finish
+    If StartPiece = -1 Then StartPiece = UBnd
     '
     If Not EndPiece = 0 Then
         If EndPiece = -1 Then EndPiece = UBnd
@@ -43,6 +52,7 @@ Public Function Extract(Str As String, Optional StartPos As Integer = 1, Optiona
     StrLen = Len(Str)
     '
     If EndPos = -1 Then EndPos = StrLen
+    If StartPos = -1 Then StartPos = StrLen
     Extract = Strings.Mid$(Str, StartPos, EndPos - StartPos + 1)
 End Function
 
@@ -52,8 +62,26 @@ Public Function TextFromCell(pCell As Cell) As String
     cellText = pCell.Range.Text
     TextFromCell = cellText
     '
-    If Extract(cellText, Len(cellText) - 2) = (Chr(13) & Chr(7)) Then
+    If Extract(cellText, Len(cellText) - 1) = (Chr(13) & Chr(7)) Then
         TextFromCell = Mid$(cellText, 1, Len(cellText) - 2)
     End If
 End Function
 
+Public Function Contains(Str As String, StrIn As String, Delim As String) As Boolean
+    Dim SplitArr() As String
+    Dim RetStr As Boolean
+    Dim Pce As Integer
+    '
+    RetStr = False
+    '
+    SplitArr = Strings.Split(StrIn, Delim)
+    
+    For Pce = LBound(SplitArr) To UBound(SplitArr)
+        If SplitArr(Pce) = Str Then
+            RetStr = True
+            Exit For
+        End If
+    Next Pce
+    
+    Contains = RetStr
+End Function
