@@ -58,3 +58,31 @@ Sub initJSON()
     '
     scriptControl.Run("GetAttachCnt")
 End Sub
+		
+	Found = False
+    exitWhile = False
+    Folder = Dir(RootPath, vbDirectory)
+    While (Folder <> "")
+        Debug.Print Folder
+        If isValidFolder(Folder, cQuery) Then
+            Found = True
+            vFolders.Add (RootPath & Folder & "\")
+        Else
+            If Found = True Then
+                exitWhile = True
+            End If
+        End If
+        Folder = Dir
+        If exitWhile Then Folder = ""
+    Wend
+    
+    For i = 1 To vFolders.Count
+        FilePath = vFolders.Item(i)
+        File = Dir(ComparePath)
+        While (File <> "")
+            If isValidFile(File, Namespace) Then
+                vFiles.Add (FilePath & File)
+            End If
+            File = Dir
+        Wend
+    Next
