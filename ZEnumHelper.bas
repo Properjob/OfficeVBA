@@ -22,8 +22,6 @@ Sub Load()
 Sub RegistryKeysLoad()
     Set RegistryKeys = RegistryKeys.Init()
     '
-    RegistryKeys.Values.Add "HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Word\Options\AutoScanCompFiles", "AutoScanCompFiles"
-    RegistryKeys.Values.Add "HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Word\Options\CompFilesPath", "CompFilesPath"
     RegistryKeys.Values.Add "HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Word\Security\AccessVBOM", "AccessVBProj"
 End Sub
 
